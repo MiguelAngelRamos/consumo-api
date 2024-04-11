@@ -15,7 +15,7 @@ const generationRow = (characters) => {
   
   const row = document.createElement("div");
   // const row = <div></div>
-  row.className = "row"; //* agregamos la clase row al div
+  row.className = "row d-flex justify-content-around"; //* agregamos la clase row al div
   // <div class="row"> </div>
   row.innerHTML = ``;
   characters.map( character => {
@@ -31,9 +31,9 @@ const generateCardBootstrap = (character) => {
 
   return `
     <div class="col-3 card mt-5" style="width: 18rem;">
-    <img src=${character.image} class="card-img-top" alt="imagen del personaje">
+    <img src=${character.image} class="mt-2 p-2 card-img-top" alt="imagen del personaje">
     <div class="card-body">
-      <h5 class="card-title">${character.name}</h5>
+      <h5 class="card-title fw-bold">${character.name}</h5>
       <p class="card-text">
         <span class="status-indicator" style="background-color:${statusColor};"></span>
         ${character.status} - ${character.species}
