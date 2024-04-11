@@ -27,16 +27,25 @@ const generationRow = (characters) => {
 };
 
 const generateCardBootstrap = (character) => {
-  // console.log(character);
-  // console.log(character.name);
-  // console.log(character.image);
+  const statusColor = character.status.toLowerCase() === 'alive' ? 'green': character.status.toLowerCase() === 'unknown'? 'gray': 'red';
+
   return `
     <div class="col-3 card mt-5" style="width: 18rem;">
     <img src=${character.image} class="card-img-top" alt="imagen del personaje">
     <div class="card-body">
       <h5 class="card-title">${character.name}</h5>
-      <p class="card-text">Some quick example text to build on the card title and make up the bulk of the card's content.</p>
-      <a href="#" class="btn btn-primary">Go somewhere</a>
+      <p class="card-text">
+        <span class="status-indicator" style="background-color:${statusColor};"></span>
+        ${character.status} - ${character.species}
+      </p>
+     
+      <p class="card-text" style="margin-bottom: 0;">
+        Last known location:
+      </p>
+
+      <p class="card-text">
+      ${character.location.name}
+      </p>
     </div>
     </div>
   `;
