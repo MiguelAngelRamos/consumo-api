@@ -71,11 +71,11 @@ const generateCardBootstrap = (character, lastEpisodeName) => {
   return `
     <div class="card col-lg-12 col-xl-6 d-flex mt-5" style="max-width: 38rem;">
       <div class="row g-0">
-        <div class="col-md-5">
+        <div class="col-4 col-md-5">
         <img src=${character.image} class="img-fluid rounded-start" alt="imagen del personaje">
         </div>
 
-        <div class="col-md-7">
+        <div class="col-8 col-md-7">
         <div class="card-body">
           <h5 class="card-title fw-bold">${character.name}</h5>
           <p class="card-text">
