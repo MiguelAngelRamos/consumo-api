@@ -1,5 +1,6 @@
 const container = document.querySelector('#container');
-
+/*const container = <div id="container" class="container mt-4">
+</div>*/
 const getCharacters = async () => {
   try {
     const response = await fetch("https://rickandmortyapi.com/api/character");
@@ -16,7 +17,7 @@ const generationRow = (characters) => {
   const row = document.createElement("div");
   // const row = <div></div>
   row.className = "row d-flex justify-content-around"; //* agregamos la clase row al div
-  // <div class="row"> </div>
+  // <div class="row d-flex justify-content-around"> </div>
   row.innerHTML = ``;
   characters.map( character => {
     // console.log(character);
