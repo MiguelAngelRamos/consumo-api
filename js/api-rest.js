@@ -1,6 +1,9 @@
 const container = document.querySelector('#container');
+const formSearch = document.querySelector('#form-search');
+const loader = document.querySelector("#loader-indicator");
 /*const container = <div id="container" class="container mt-4">
 </div>*/
+
 const getCharacters = async () => {
   try {
     const response = await fetch("https://rickandmortyapi.com/api/character");
@@ -11,6 +14,25 @@ const getCharacters = async () => {
     throw new Error(error);
   }
 };
+
+const searchCharacterByName = async (characterName) => {
+
+  try {
+    loader.style.display = "block";
+    const response = await fetch(`https://rickandmortyapi.com/api/character/?name=${characterName}`);
+    if(response.status === 404) {
+      throw new Error('Character not found');
+    }
+    const data = await response.json();
+    console.log(data.results);
+    container.appendChild(generationRow(data.results));
+    loader.style.display = "none";
+  } catch (error) {
+    container.innerHTML = `<h1 class="mt-5 text-center">Character not found</h1>`
+    loader.style.display = "none";
+  }
+  // console.log(characterName);
+}
 
 const generationRow = (characters) => {
   
@@ -31,7 +53,7 @@ const generateCardBootstrap = (character) => {
   const statusColor = character.status.toLowerCase() === 'alive' ? 'green': character.status.toLowerCase() === 'unknown'? 'gray': 'red';
 
   return `
-    <div class="card d-flex mt-5" style="max-width: 40rem;">
+    <div class="card col-4 d-flex mt-5" style="max-width: 38rem;">
       <div class="row g-0">
         <div class="col-md-5">
         <img src=${character.image} class="img-fluid rounded-start" alt="imagen del personaje">
@@ -45,7 +67,7 @@ const generateCardBootstrap = (character) => {
             ${character.status} - ${character.species}
           </p>
         
-          <p class="card-text" style="margin-bottom: 0;">
+          <p class="card-text location" style="margin-bottom: 0;">
             Last known location:
           </p>
 
@@ -60,6 +82,19 @@ const generateCardBootstrap = (character) => {
   `;
 };
 
+//* FORMULARIO
+formSearch.addEventListener('submit', function(event) {
+  event.preventDefault();
+  const characterSearch = document.querySelector('#search-character').value;
+  container.innerHTML = '';
+  searchCharacterByName(characterSearch);
+})
+
+
+getCharacters();
+
+
+
 // const getCharacters = () => {
 //   fetch("https://rickandmortyapi.com/api/character")
 //   .then(function(response){
@@ -72,7 +107,3 @@ const generateCardBootstrap = (character) => {
 //     console.log(error);
 //   })
 // }
-
-
-
-getCharacters();

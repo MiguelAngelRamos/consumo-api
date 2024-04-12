@@ -32,3 +32,16 @@ body {
   font-size: 7.5rem; 
   font-weight: 800;
 }
+
+.card-text.location {
+  color: #c9c1c1;
+}
+
+#loader-indicator {
+  display: none;
+  width: 10px;
+  height: 10px;
+  border-radius: 50%;
+  font-size: 8rem;
+  margin-top: 2rem;
+}

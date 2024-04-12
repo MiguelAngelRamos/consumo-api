@@ -22,10 +22,12 @@
             <ul class="navbar-nav me-auto mb-2 mb-lg-0">
               <li class="nav-item"></li>
             </ul>
-            <form class="d-flex" role="search">
-              <input class="form-control me-2" type="search" placeholder="Search" aria-label="Search">
+
+            <form id="form-search" class="d-flex" role="search">
+              <input id="search-character" class="form-control me-2" type="search" placeholder="Search" aria-label="Search">
               <button class="btn btn-outline-dark" type="submit">Search</button>
             </form>
+
           </div>
         </div>
       </nav>
@@ -36,7 +38,10 @@
     </div>
 
     <main>
-      <div id="container" class="container mt-4">
+      <div class="d-flex justify-content-center">
+        <div id="loader-indicator" class="spinner-border"></div>
+      </div>
+      <div id="container" class="container-fluid mt-4">
       </div>
     </main>
 
@@ -44,12 +49,6 @@
     <script src="js/api-rest.js"></script>
 
     
-
-
-
-
-
-
 
 
 
