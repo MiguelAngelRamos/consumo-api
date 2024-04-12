@@ -15,6 +15,20 @@ const getCharacters = async () => {
   }
 };
 
+const getEpisode = async (url) => {
+  if (!url) {
+    return 'No episodes avaible';
+  }
+  try {
+    const response = await fetch(url);
+    const data = await response.json();
+    return data.name;
+  } catch (error) {
+    throw new Error(error);
+
+  }
+};
+
 const searchCharacterByName = async (characterName) => {
 
   try {
@@ -41,19 +55,21 @@ const generationRow = (characters) => {
   row.className = "row d-flex justify-content-around"; //* agregamos la clase row al div
   // <div class="row d-flex justify-content-around"> </div>
   row.innerHTML = ``;
-  characters.map( character => {
+  characters.map( async character => {
     // console.log(character);
-    row.innerHTML = row.innerHTML + generateCardBootstrap(character);
+    const lastEpisodeUrl = character.episode[character.episode.length - 1];
+    const lastEpisodeName = await getEpisode(lastEpisodeUrl);
+    row.innerHTML = row.innerHTML + generateCardBootstrap(character, lastEpisodeName);
   })
   console.log(row);
   return row;
 };
 
-const generateCardBootstrap = (character) => {
+const generateCardBootstrap = (character, lastEpisodeName) => {
   const statusColor = character.status.toLowerCase() === 'alive' ? 'green': character.status.toLowerCase() === 'unknown'? 'gray': 'red';
 
   return `
-    <div class="card col-4 d-flex mt-5" style="max-width: 38rem;">
+    <div class="card col-lg-12 col-xl-6 d-flex mt-5" style="max-width: 38rem;">
       <div class="row g-0">
         <div class="col-md-5">
         <img src=${character.image} class="img-fluid rounded-start" alt="imagen del personaje">
@@ -74,6 +90,14 @@ const generateCardBootstrap = (character) => {
           <p class="card-text">
           ${character.location.name}
           </p>
+          
+          <p class="card-text location" style="margin-bottom: 0;">
+            Last episode:
+          </p>
+           <p class="card-text">
+            ${lastEpisodeName}
+          </p>
+          
         </div>
       </div> 
       </div>
